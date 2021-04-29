@@ -17,6 +17,7 @@
 # include <stdlib.h>
 # include <unistd.h>
 
+# define LONG_MAX 9223372036854775808U
 typedef struct s_list
 {
 	void			*content;

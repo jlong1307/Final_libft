@@ -19,6 +19,8 @@ void	*ft_memcpy(void *dst, const void *src, size_t n)
 
 	zone1 = (unsigned char *)src;
 	zone2 = (unsigned char *)dst;
+	if (!dst && !src)
+		return (0);
 	while (n > 0)
 	{
 		*zone2++ = *zone1++;

@@ -14,11 +14,20 @@
 
 void	*ft_calloc(size_t nmemb, size_t size)
 {
-	void	*ptr;
+	void			*ptr;
+	unsigned int	a;
+	unsigned int	b;
 
-	ptr = (void *)malloc(nmemb * size);
-	if (!(ptr))
+	a = (unsigned int)nmemb;
+	b = (unsigned int)size;
+	if (nmemb == 0 || size == 0)
+	{
+		a = 1;
+		b = 1;
+	}
+	ptr = (void *)malloc(a * b);
+	if (!ptr)
 		return (NULL);
-	ft_bzero(ptr, nmemb);
+	ft_bzero(ptr, a * b);
 	return (ptr);
 }

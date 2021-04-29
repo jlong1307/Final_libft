@@ -50,10 +50,13 @@ static int	len_of_str(const char *ss, char c, int start)
 
 static char	**free_t(const char **tab, int n)
 {
-	while (n > 0)
+	int	i;
+
+	i = 0;
+	while (i <= n)
 	{
-		n--;
 		free ((void *)tab[n]);
+		i++;
 	}
 	free (tab);
 	return (NULL);
@@ -93,9 +96,9 @@ char	**ft_split(const char *s, char c)
 	char	**tab;
 	int		i;
 
-	i = nbr_of_sep(s, c);
 	if (!s)
 		return (NULL);
+	i = nbr_of_sep(s, c);
 	tab = malloc(sizeof(char **) * (i + 1));
 	if (!tab)
 		return (NULL);

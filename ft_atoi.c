@@ -12,29 +12,48 @@
 
 #include "libft.h"
 
-int	ft_atoi(const char *str)
+static int	ft_sign(const char *str, int *sign, int i)
 {
-	unsigned long long	i;
-	unsigned long long	r;
-	int					s;
-
-	i = 0;
-	r = 0;
-	s = 1;
-	while (str[i] == ' ' || (str[i] >= '\t' && str[i] <= '\r'))
-		i++;
 	if (str[i] == '-')
 	{
-		s = -1;
+		*sign = -1;
 		i++;
 	}
 	else if (str[i] == '+')
 		i++;
+	return (i);
+}
+
+static int	ft_isovermaxmin(int sign)
+{
+	if (sign == 1)
+		return (-1);
+	return (0);
+}
+
+int	ft_atoi(const char *str)
+{
+	unsigned long	max;
+	unsigned long	i;
+	unsigned long	r;
+	int				s;
+
+	i = 0;
+	r = 0;
+	s = 1;
+	max = LONG_MAX / 10;
+	if (str[0] == '\0')
+		return (0);
+	while (str[i] == ' ' || (str[i] >= '\t' && str[i] <= '\r'))
+		i++;
+	i = ft_sign(str, &s, i);
 	while (ft_isdigit(str[i]))
 	{
 		r = r * 10;
 		r += str[i] - '0';
+		if (r > max)
+			return (ft_isovermaxmin(s));
 		i++;
 	}
-	return (s * r);
+	return ((int)(s * r));
 }
