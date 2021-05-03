@@ -24,19 +24,21 @@ static int	ft_sign(const char *str, int *sign, int i)
 	return (i);
 }
 
-static int	ft_isovermaxmin(int sign)
+static int	ft_isovermaxmin(int sign, unsigned long long r)
 {
 	if (sign == 1)
 		return (-1);
+	if (sign == -1 && r == 9223372036854775807)
+		return (1);
 	return (0);
 }
 
 int	ft_atoi(const char *str)
 {
-	unsigned long	max;
-	unsigned long	i;
-	unsigned long	r;
-	int				s;
+	unsigned long long	max;
+	unsigned long long	i;
+	unsigned long long	r;
+	int					s;
 
 	i = 0;
 	r = 0;
@@ -49,10 +51,9 @@ int	ft_atoi(const char *str)
 	i = ft_sign(str, &s, i);
 	while (ft_isdigit(str[i]))
 	{
-		r = r * 10;
-		r += str[i] - '0';
+		r = r * 10 + str[i] - 48;
 		if (r > max)
-			return (ft_isovermaxmin(s));
+			return (ft_isovermaxmin(s, r));
 		i++;
 	}
 	return ((int)(s * r));
